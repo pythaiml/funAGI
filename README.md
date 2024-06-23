@@ -77,6 +77,57 @@ Belief-Desire-Intention Model (bdi.py):
 
 
     funAGI.py is the UI. fundatmentalAGI funAGI has been published to showcase, audit and debug the easyAGI SocraticReasoning.py and logic.py
+#########################################################################
+# Process Flow from User Input to Response
+Step 1: User Input
+
+    Action: The user provides an input via the command line.
+    Input Example: "Explain the workflow to building AGI"
+
+Step 2: Perceive Environment
+
+    Method: EasyAGI.perceive_environment
+    Action: The system captures the user's input.
+    Output: The user's input string is returned for processing.
+
+Step 3: Learning from Data
+
+    Method: AGI.learn_from_data
+    Action: The user's input string is processed to extract propositions.
+    Process:
+        The input string is split into two propositions based on a delimiter (e.g., ";").
+        If the input contains only one proposition, the second proposition is set as an empty string.
+        The propositions are added as premises in the Socratic reasoning engine.
+    Output: Two propositions are returned for further processing.
+
+    Adding Premises to Socratic Reasoning:
+        Validates and adds each proposition as a premise.
+        Logs each addition.
+
+    Processing THOT:
+        Iterates through reasoning methods.
+        Generates intermediate conclusions.
+        Aggregates combined results.
+
+    Logging THOT Data:
+        Logs premises, combined results, and final decision.
+        Appends to THOT log file (thots.json).
+
+    Drawing a Conclusion:
+        Generates logical conclusion using language model.
+        Validates conclusion.
+        Logs conclusion.
+
+    Communicating Response:
+        Prints final decision to console.
+        Logs communicated response.
+
+    Storing Conversation Memory:
+        Creates DialogEntry with input and decision.
+        Saves entry to STM.
+
+This workflow provides a comprehensive view of how user input is processed, reasoned with, and responded to in fundamentalAGI funAGI.py system. Each component plays a critical role in ensuring the AGI provides accurate and logical responses based on the input provided.
+################################################################
 
 install (builds an openai API and groq API ready terminal interaction from openai or groq API key with response from SocraticReasoning.py and logic.py with logging to local folders from memory.py)
 
