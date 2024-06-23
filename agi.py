@@ -72,7 +72,7 @@ class EasyAGI:
             store_in_stm(entry)
 
     def perceive_environment(self):
-        agi_prompt = input("Enter the problem to solve (or type 'exit' to quit): ")
+        agi_prompt = input("") # environment is empty prompt
         return agi_prompt
 
     def communicate_response(self, decision):
