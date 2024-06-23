@@ -78,7 +78,7 @@ Belief-Desire-Intention Model (bdi.py):
 
     funAGI.py is the UI. fundatmentalAGI funAGI has been published to showcase, audit and debug the easyAGI SocraticReasoning.py and logic.py
 
-install (builds an openai API and groq API ready terminal interaction with response from SocraticReasoning.py and logic.py with logging to local folders from memory.py
+install (builds an openai API and groq API ready terminal interaction from openai or groq API key with response from SocraticReasoning.py and logic.py with logging to local folders from memory.py)
 
 ```bash
 git clone https://github.com/autoGLM/funAGI/
