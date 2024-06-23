@@ -1,0 +1,14 @@
+# For interacting with the OpenAI API.
+openai
+
+# For interacting with the groq models
+groq
+
+# For loading environment variables from a .env file.
+python-dotenv
+
+# For fast JSON processing.
+ujson
+
+# For system and process utilities.
+psutil
