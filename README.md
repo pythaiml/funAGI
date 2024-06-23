@@ -1,5 +1,7 @@
 # funAGI
-fundamental AGI point of departure from SimpleMind logic and SocraticReasoning
+fundamental AGI point of departure logic.py and SocraticReasoning.py
+debug environment with logging
+to do: include SimpleMind.py neural network and coach.py training
 
 FundamentalAGI Project Setup
 
