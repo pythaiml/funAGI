@@ -7,6 +7,7 @@ from memory import create_memory_folders, save_valid_truth, store_in_stm, Dialog
 
 class LogicTables:
     def __init__(self):
+        create_memory_folders()  # Ensure all necessary directories are created
         self.variables = []
         self.expressions = []
         self.valid_truths = []
