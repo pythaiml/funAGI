@@ -72,3 +72,19 @@ Belief-Desire-Intention Model (bdi.py):
 
     Manages beliefs, desires, and intentions.
     Processes BDI components for decision making.
+
+
+    funAGI.py is the UI. fundatmentalAGI funAGI has been published to showcase the easyAGI Socratic Reasoning and logic integrated into the more complex and easier to use easyAGI
+
+install
+
+```bash
+git clone https://github.com/autoGLM/funAGI/
+cd funAGI
+python3 -m venv fun
+source fun/bin/activate
+pip install -r requirements.txt
+python3 funAGI.py
+```
+
+
