@@ -14,6 +14,7 @@ codebase to create a simplified version called fundamentalAGI.py. This new scrip
     memory.py: Memory management for storing dialogues and truth values.
     SocraticReasoning.py: Socratic reasoning engine for the AGI.
 
+# agi.py AGI workflow
 
     API Key Management (api.py):
 
@@ -47,6 +48,25 @@ Logic Table Management (logic.py):
 Chat Models (chatter.py):
 
     Interfaces for different chat models like GPT4o, GroqModel, and OllamaModel.
+
+# Key Components and Flow
+
+    API Key Management:
+        APIManager class handles loading, saving, and managing API keys.
+        In EasyAGI.__init__, the user is prompted to manage API keys if necessary.
+
+    Learning from Data:
+        AGI.learn_from_data method processes input data into two propositions.
+        These propositions are added as premises to the SocraticReasoning engine.
+
+    Making Decisions:
+        AGI.make_decisions method invokes the Socratic reasoning process to draw a conclusion.
+        The conclusion (decision) is returned.
+
+    Main Loop:
+        EasyAGI.main_loop handles user input and processes it using the AGI system.
+        Decisions are communicated back to the user and stored in short-term memory.
+
 
 Belief-Desire-Intention Model (bdi.py):
 
