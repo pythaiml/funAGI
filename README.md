@@ -13,3 +13,42 @@ codebase to create a simplified version called fundamentalAGI.py. This new scrip
     logic.py: Logic table management and evaluation.
     memory.py: Memory management for storing dialogues and truth values.
     SocraticReasoning.py: Socratic reasoning engine for the AGI.
+
+
+    API Key Management (api.py):
+
+    Loads API keys from api_keys.json or environment variables.
+    Manages adding, removing, and listing API keys.
+
+Core AGI Logic (agi.py):
+
+    Initializes the AGI with API manager and chatter models.
+    Learns from data by creating propositions.
+    Makes decisions by leveraging SocraticReasoning.
+
+Memory Management (memory.py):
+
+    Handles creating necessary directories.
+    Stores and loads conversation memories.
+    Stores valid truths and dialogue entries.
+
+Socratic Reasoning (SocraticReasoning.py):
+
+    Manages premises and draws logical conclusions.
+    Logs actions and results.
+    Validates conclusions using LogicTables.
+
+Logic Table Management (logic.py):
+
+    Manages logic variables, expressions, and truth tables.
+    Evaluates expressions and validates truths.
+    Logs all actions and saves beliefs.
+
+Chat Models (chatter.py):
+
+    Interfaces for different chat models like GPT4o, GroqModel, and OllamaModel.
+
+Belief-Desire-Intention Model (bdi.py):
+
+    Manages beliefs, desires, and intentions.
+    Processes BDI components for decision making.
