@@ -129,6 +129,49 @@ Step 3: Learning from Data
 This workflow provides a comprehensive view of how user input is processed, reasoned with, and responded to in fundamentalAGI funAGI.py system. Each component plays a critical role in ensuring the AGI provides accurate and logical responses based on the input provided.
 ################################################################
 
+```csharp
++-------------------+       +-------------------+       +---------------------+
+|    User Input     | ----> | Perceive          | ----> | Learning from Data  |
+| (Command Line)    |       | Environment       |       | (Extract Propositions)|
++-------------------+       +-------------------+       +---------------------+
+                                      |
+                                      v
+                             +-------------------+
+                             | Add Premises to   |
+                             | Socratic Reasoning|
+                             +-------------------+
+                                      |
+                                      v
+                             +-------------------+
+                             |  Process THOT     |
+                             |  (Various Reasoning|
+                             |   Techniques)      |
+                             +-------------------+
+                                      |
+                                      v
+                             +-------------------+
+                             |  Log THOT Data    |
+                             +-------------------+
+                                      |
+                                      v
+                             +-------------------+
+                             |  Draw Conclusion  |
+                             |  (GPT-4 Model)    |
+                             +-------------------+
+                                      |
+                                      v
+                             +-------------------+
+                             |Communicate Response|
+                             |  to User           |
+                             +-------------------+
+                                      |
+                                      v
+                             +-------------------+
+                             | Store Conversation |
+                             | Memory (STM)       |
+                             +-------------------+
+```
+
 install (builds an openai API and groq API ready terminal interaction from openai or groq API key with response from SocraticReasoning.py and logic.py with logging to local folders from memory.py)
 
 ```bash
