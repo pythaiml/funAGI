@@ -5,7 +5,9 @@ to do: include SimpleMind.py neural network and coach.py training
 
 FundamentalAGI Project Setup
 
-codebase to create a simplified version called fundamentalAGI.py. This new script will use SocraticReasoning.py and logic.py with verbose logging to understand the export of the belief into ./memory/truth. This simplified version will omit reasoning.py and directly leverage the core logic and memory management. Here's how we will structure the project:
+codebase to create a simplified and fun AGI for fundamentalAGI basic reasoning. funAGI.py uses SocraticReasoning.py with logic.py with verbose logging to reason to truth as export of belief into ./memory/truth. This simplified version will omits reasoning.py and SimpleMind.py to directly leverage the core logic and memory management of the basic reasoning AGI.
+
+# project structure
 
     fundamentalAGI.py: Main script to run the AGI.
     agi.py: Core AGI logic.
@@ -104,12 +106,12 @@ Step 3: Learning from Data
         Validates and adds each proposition as a premise.
         Logs each addition.
 
-    Processing THOT:
+    skipped ::::: Processing THOT:
         Iterates through reasoning methods.
         Generates intermediate conclusions.
         Aggregates combined results.
 
-    Logging THOT Data:
+    skipped ::::: Logging THOT Data:
         Logs premises, combined results, and final decision.
         Appends to THOT log file (thots.json).
 
@@ -126,7 +128,7 @@ Step 3: Learning from Data
         Creates DialogEntry with input and decision.
         Saves entry to STM.
 
-This workflow provides a comprehensive view of how user input is processed, reasoned with, and responded to in fundamentalAGI funAGI.py system. Each component plays a critical role in ensuring the AGI provides accurate and logical responses based on the input provided.
+This workflow provides a comprehensive view of how user input is processed, reasoned with, and responded to in fundamentalAGI funAGI.py system. Each component plays a critical role in ensuring the AGI provides accurate and logical responses based on the input provided. funAGI is the simplified agi --> SocraticReasoning --> logic --> response dialogue
 ################################################################
 
 ```csharp
