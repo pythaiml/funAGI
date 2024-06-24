@@ -177,6 +177,12 @@ This workflow provides a comprehensive view of how user input is processed, reas
 install (builds an openai API and groq API ready terminal interaction from openai or groq API key with response from SocraticReasoning.py and logic.py with logging to local folders from memory.py)
 logs SocraticReasoning to ./mindx/socraticlogs.txt logs errors to ./mindx/errors/logs.txt logs logic.py truth tables errors to ./mindx/truth/logs.txt shows truthtable creation in ./mindx/truth/2024-06-23T22:44:49.670605_belief.txt to do: include statement of belief in belief log; fix SocraticReasoning from ./mindx/socraticlogs.txt
 
+memory is successfully stored in ./memory/stm/1719207889.json as timestamped instruction / response 
+
+
+
+{"instruction":"agi","response":"a logical conclusion based on the premise of autonomous general intelligence (agi) is that it has the ability to independently perform a wide range of tasks at a level equal to or beyond that of a human being. agi would be capable of understanding, learning, and applying knowledge across a wide range of domains and tasks, and would be able to adapt to new situations and environments. it would be able to understand and respond to natural language, recognize and interpret visual and auditory information, and make decisions and solve problems based on its understanding. additionally, agi would be capable of self-improvement and continue to learn and get better at tasks over time. however, it is important to note that the development of agi also raises ethical and societal concerns that need to be addressed."}
+
 this is the bare bones working version of funAGI with error logging and first errors to fix from first working deployment. fundamental funAGI.py point of departure version 1
 
 ```bash
