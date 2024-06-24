@@ -1,4 +1,3 @@
-# logic.py
 import itertools
 import logging
 import datetime
@@ -7,21 +6,26 @@ from memory import create_memory_folders, save_valid_truth, store_in_stm, Dialog
 
 class LogicTables:
     def __init__(self):
-        create_memory_folders()  # Ensure all necessary directories are created
         self.variables = []
         self.expressions = []
         self.valid_truths = []
         self.logger = logging.getLogger('LogicTables')
         self.logger.setLevel(logging.DEBUG)  # Set to DEBUG to capture all logs
 
+        # Ensure directories exist
+        general_log_dir = './mindx/errors'
+        memory_log_dir = './memory/truth'
+        pathlib.Path(general_log_dir).mkdir(parents=True, exist_ok=True)
+        pathlib.Path(memory_log_dir).mkdir(parents=True, exist_ok=True)
+
         # General log file for mindx
-        file_handler_mindx = logging.FileHandler('./mindx/errors/log.txt')
+        file_handler_mindx = logging.FileHandler(f'{general_log_dir}/log.txt')
         file_handler_mindx.setLevel(logging.DEBUG)
         file_formatter_mindx = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         file_handler_mindx.setFormatter(file_formatter_mindx)
 
         # Log file for memory/truth
-        file_handler_memory = logging.FileHandler('./memory/truth/logs.txt')
+        file_handler_memory = logging.FileHandler(f'{memory_log_dir}/logs.txt')
         file_handler_memory.setLevel(logging.DEBUG)
         file_formatter_memory = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         file_handler_memory.setFormatter(file_formatter_memory)
