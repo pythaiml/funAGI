@@ -175,6 +175,9 @@ This workflow provides a comprehensive view of how user input is processed, reas
 ```
 
 install (builds an openai API and groq API ready terminal interaction from openai or groq API key with response from SocraticReasoning.py and logic.py with logging to local folders from memory.py)
+logs SocraticReasoning to ./mindx/socraticlogs.txt logs errors to ./mindx/errors/logs.txt logs logic.py truth tables errors to ./mindx/truth/logs.txt shows truthtable creation in ./mindx/truth/2024-06-23T22:44:49.670605_belief.txt to do: include statement of belief in belief log; fix SocraticReasoning from ./mindx/socraticlogs.txt
+
+this is the bare bones working version of funAGI with error logging and first errors to fix from first working deployment
 
 ```bash
 git clone https://github.com/autoGLM/funAGI/
