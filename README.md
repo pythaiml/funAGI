@@ -1,6 +1,6 @@
 # funAGI
 fundamental AGI point of departure agi.py bdi.py logic.py and SocraticReasoning.py using api.py with memory.py<br />
-debug environment with logging<br />
+debug environment includes logging for deeper understanding of the reasoning process and troubleshooting<br />
 to do: include SimpleMind.py neural network and coach.py training
 
 FundamentalAGI Project Setup
