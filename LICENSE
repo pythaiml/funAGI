@@ -1,6 +1,18 @@
 MIT License
 
-Copyright (c) 2024 aGLM
+# fundamental agi
+# autonomous general intelligence framework
+
+funAGI (c) 2024 Gregory L. Magnusson
+
+funAGI.py
+agi.py
+api.py
+bdi.py
+logic.py
+memory.py
+chatter.py
+SocraticReasoning.py
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
