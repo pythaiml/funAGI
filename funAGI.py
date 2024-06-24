@@ -1,4 +1,3 @@
-# funAGI.py
 import openai
 import logging
 from memory import save_conversation_memory, load_conversation_memory, delete_conversation_memory, create_memory_folders, store_in_stm, DialogEntry
