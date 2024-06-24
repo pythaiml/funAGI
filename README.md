@@ -179,10 +179,9 @@ logs SocraticReasoning to ./mindx/socraticlogs.txt logs errors to ./mindx/errors
 
 memory is successfully stored in ./memory/stm/1719207889.json as timestamped instruction / response 
 
-
-
+```json
 {"instruction":"agi","response":"a logical conclusion based on the premise of autonomous general intelligence (agi) is that it has the ability to independently perform a wide range of tasks at a level equal to or beyond that of a human being. agi would be capable of understanding, learning, and applying knowledge across a wide range of domains and tasks, and would be able to adapt to new situations and environments. it would be able to understand and respond to natural language, recognize and interpret visual and auditory information, and make decisions and solve problems based on its understanding. additionally, agi would be capable of self-improvement and continue to learn and get better at tasks over time. however, it is important to note that the development of agi also raises ethical and societal concerns that need to be addressed."}
-
+```
 this is the bare bones working version of funAGI with error logging and first errors to fix from first working deployment. fundamental funAGI.py point of departure version 1
 
 ```bash
