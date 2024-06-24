@@ -1,32 +1,25 @@
-# agi.py
 import logging
-import json
-import os
 from SocraticReasoning import SocraticReasoning
-from memory import save_conversation_memory, load_conversation_memory, delete_conversation_memory, create_memory_folders, store_in_stm, DialogEntry
-from api import APIManager
-from chatter import GPT4o
+from logic import LogicTables
+from memory import store_in_stm, DialogEntry
+from chatter import GPT4o, Groq
 
 class AGI:
-    def __init__(self, api_manager):
-        self.api_manager = api_manager
-        self.chatter = GPT4o(api_manager.get_api_key('openai'))
+    def __init__(self, chatter):
+        self.chatter = chatter
         self.reasoning = SocraticReasoning(self.chatter)
 
     def learn_from_data(self, data):
-        # For simplicity, let's assume the input data is split into two propositions
-        propositions = data.split(';')
-        if len(propositions) >= 2:
-            proposition_p = propositions[0].strip()
-            proposition_q = propositions[1].strip()
-        else:
-            proposition_p = data.strip()
-            proposition_q = ""
+        proposition_p = data  # For simplicity, treat the entire input as one proposition
+        proposition_q = "processed data"  # Placeholder for further processing if needed
+        return proposition_p, proposition_q
 
+    def make_decisions(self, proposition_p, proposition_q):
         self.reasoning.add_premise(proposition_p)
         self.reasoning.add_premise(proposition_q)
+        self.reasoning.draw_conclusion()
+        return self.reasoning.logical_conclusion
 
-        return proposition_p, proposition_q
 
     def make_decisions(self, proposition_p, proposition_q):
         self.reasoning.draw_conclusion()

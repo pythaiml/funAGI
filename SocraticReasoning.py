@@ -1,19 +1,15 @@
 import logging
 import pathlib
-from chatter import GPT4o
+from chatter import GPT4o, GroqModel, OllamaModel
 from logic import LogicTables
+from memory import store_in_stm, DialogEntry
 
 class SocraticReasoning:
     def __init__(self, chatter):
         self.premises = []
         self.logger = logging.getLogger('SocraticReasoning')
         self.logger.setLevel(logging.DEBUG)  # Set to DEBUG to capture all logs
-        
-        # Ensure the directory exists
-        socratic_log_dir = './mindx'
-        pathlib.Path(socratic_log_dir).mkdir(parents=True, exist_ok=True)
-
-        file_handler = logging.FileHandler(f'{socratic_log_dir}/socraticlog.txt')  # Save logs to file
+        file_handler = logging.FileHandler('./mindx/socraticlog.txt')  # Save logs to file
         file_handler.setLevel(logging.DEBUG)
         file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         file_handler.setFormatter(file_formatter)
@@ -84,7 +80,6 @@ class SocraticReasoning:
 
         if not self.validate_conclusion():
             self.log('Invalid conclusion. Please revise.', level='error')
-            return "Invalid conclusion. Please revise."
 
         return self.logical_conclusion
 
@@ -115,7 +110,7 @@ class SocraticReasoning:
                 premise = input("Enter the premise to challenge: ").strip()
                 self.challenge_premise(premise)
             elif cmd == 'conclude':
-                print(self.draw_conclusion())
+                self.draw_conclusion()
             elif cmd == 'set_tokens':
                 tokens = input("Enter the maximum number of tokens for the conclusion: ").strip()
                 if tokens.isdigit():
@@ -143,3 +138,4 @@ if __name__ == "__main__":
     socratic_reasoning.draw_conclusion()
     print(socratic_reasoning.logical_conclusion)
     socratic_reasoning.interact()
+
