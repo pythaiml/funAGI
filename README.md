@@ -6,7 +6,7 @@ to do: include SimpleMind.py neural network and coach.py training
 FundamentalAGI Project Setup
 
 codebase to create a simplified and fun AGI for fundamentalAGI basic reasoning. funAGI.py uses SocraticReasoning.py with logic.py
-verbose logging to reason to truth as export of belief into ./memory/truth. This simplified version will omits reasoning.py and SimpleMind.py to directly leverage the core logic and memory management of the basic reasoning AGI.
+verbose logging to reason to truth as export of belief into ./memory/truth. This simplified version will omits reasoning.py and SimpleMind.py to directly leverage the core logic and memory management of the basic reasoning AGI. For a deep dive into SocraticReasoning.py visit <a href="https://rage.pythai.net/understanding-socraticreasoning-py/">https://rage.pythai.net/understanding-socraticreasoning-py/</a>
 
 # project structure
 
