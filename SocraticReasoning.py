@@ -73,10 +73,10 @@ class SocraticReasoning:
             return "No premises available for logic as conclusion."
 
         premise_text = "\n".join(f"- {premise}" for premise in self.premises)
-        prompt = f"Based on the premises:\n{premise_text}\nProvide a logical conclusion."
+        prompt = f"Premises:\n{premise_text}\nConclusion?"
 
         self.logical_conclusion = self.chatter.generate_response(prompt)
-        self.log(f"Conclusion:\n{self.logical_conclusion}")
+        self.log(f"{self.logical_conclusion}")  # Log the conclusion directly
 
         if not self.validate_conclusion():
             self.log('Invalid conclusion. Please revise.', level='error')
