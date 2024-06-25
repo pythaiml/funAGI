@@ -9,7 +9,7 @@ class GPT4o:
         openai.api_key = self.openai_api_key
 
     def generate_response(self, knowledge, model="gpt-4o"):
-        prompt = f"autonomous general intelligence return solution: {knowledge}."
+        prompt = f"{knowledge}"
         try:
             response = openai.chat.completions.create(
                 model=model,
@@ -29,7 +29,7 @@ class GroqModel:
         self.client = Groq(api_key=groq_api_key)
 
     def generate_response(self, knowledge, model="mixtral-8x7b-32768"):
-        prompt = f"autonomous general intelligence return solution: {knowledge}."
+        prompt = f"{knowledge}"
         try:
             chat_completion = self.client.chat.completions.create(
                 messages=[
