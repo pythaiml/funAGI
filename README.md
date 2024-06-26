@@ -177,19 +177,19 @@ This workflow provides a comprehensive view of how user input is processed, reas
 ```
 
 # install
-(builds an openai API and groq API ready terminal interaction from openai or groq API key with response from SocraticReasoning.py and logic.py with logging to local folders from memory.py)
-logs SocraticReasoning<br />
+(builds an openai API and groq API ready terminal interaction from openai or groq API key with response from SocraticReasoning.py and logic.py with logging to local folders from memory.py)<br />
+<b>logs SocraticReasoning</b><br />
 ./mindx/socraticlogs.txt<br />
-logs errors<br />
+<b>logs errors</b><br />
 ./mindx/errors/logs.txt<br />
-logs logic.py truth tables errors to<br />
+<b>logs logic.py truth tables errors to</b><br />
 ./mindx/truth/logs.txt<br />
-shows truthtable creation in<br /> 
+<b>shows truthtable creation in</b><br /> 
 ./mindx/truth/2024-06-23T22:44:49.670605_belief.txt<br /> 
 
 to do: include statement of belief in belief log; fix SocraticReasoning from ./mindx/socraticlogs.txt<br />
 
-memory is successfully stored in<br />
+<b>memory of each input / response is stored in</b><br />
 ./memory/stm/1719207889.json<br />
 as timestamped instruction / response<br />
 
