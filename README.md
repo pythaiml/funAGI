@@ -177,7 +177,8 @@ This workflow provides a comprehensive view of how user input is processed, reas
 ```
 
 # install
-(builds an openai API and groq API ready terminal interaction from openai or groq API key with response from SocraticReasoning.py and logic.py with logging to local folders from memory.py)<br />
+(builds an openai API and groq API ready terminal interaction from openai or groq API key<br />
+with response from SocraticReasoning.py and logic.py with logging to local folders from memory.py)<br />
 <b>logs SocraticReasoning</b><br />
 ./mindx/socraticlogs.txt<br />
 <b>logs errors</b><br />
