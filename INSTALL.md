@@ -1,3 +1,5 @@
+# funAGI.py
+
 ```bash
 git clone https://github.com/pythaiml/funAGI/
 cd funAGI
