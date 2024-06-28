@@ -1,0 +1,258 @@
+/* General Body Styles */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-image: url('/gfx/funAGIbkgrd.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #1f2937;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Link Styles */
+a:link, a:visited {
+    color: inherit !important;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Header Styles */
+header {
+    background-color: transparent; /* Transparent background */
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Main Content Styles */
+.main-content, .nicegui-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 90%;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+.button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2563eb;
+}
+
+/* Input Field Styles */
+.input, .input-area {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #d1d5db;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    width: 90%;
+    margin: 0 auto 1rem auto;
+}
+
+.input-area {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: black;
+    background-image: url('/gfx/funAGIcoin.png');
+    color: #f8fafc;
+}
+
+body.dark-mode .main-content, body.dark-mode .nicegui-content {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+body.dark-mode header {
+    background-color: transparent; /* Transparent background */
+}
+
+body.dark-mode .button {
+    background-color: #2563eb;
+}
+
+body.dark-mode .button:hover {
+    background-color: #3b82f6;
+}
+
+body.dark-mode .input, body.dark-mode .input-area {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid #f8fafc;
+    color: white;
+}
+
+body.dark-mode .input-area {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Query Response Styles */
+.response-container {
+    background-color: #6CBF6C; /* Compatible green background */
+    padding: 1rem;
+    margin: 1rem auto;
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 81%; /* Increased width to 90% of the 90% container */
+}
+
+/* Response Text Styles */
+.response-text {
+    color: #333333; /* Black text */
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Media Queries */
+@media (max-width: 575.98px) {
+    .main-content, .nicegui-content {
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 95%;
+    }
+
+    header {
+        font-size: 1.25rem;
+    }
+
+    .button {
+        padding: 0.5rem 1rem;
+    }
+
+    .response-container {
+        padding: 0.5rem;
+        margin: 0.5rem auto;
+        width: 100%;
+    }
+
+    .response-text {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .main-content, .nicegui-content {
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+        width: 95%;
+    }
+
+    header {
+        font-size: 1.35rem;
+    }
+
+    .button {
+        padding: 0.65rem 1.25rem;
+    }
+
+    .response-container {
+        padding: 0.75rem;
+        margin: 0.75rem auto;
+        width: 95%;
+    }
+
+    .response-text {
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .main-content, .nicegui-content {
+        padding: 2rem;
+        margin: 2rem auto;
+        width: 90%;
+    }
+
+    header {
+        font-size: 1.45rem;
+    }
+
+    .button {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .response-container {
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 90%;
+    }
+
+    .response-text {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .main-content, .nicegui-content {
+        padding: 2rem;
+        margin: 2rem auto;
+        width: 85%;
+    }
+
+    header {
+        font-size: 1.5rem;
+    }
+
+    .button {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .response-container {
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 85%;
+    }
+
+    .response-text {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-content, .nicegui-content {
+        padding: 2rem;
+        margin: 2rem auto;
+        width: 80%;
+    }
+
+    header {
+        font-size: 1.5rem;
+    }
+
+    .button {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .response-container {
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 80%;
+    }
+
+    .response-text {
+        font-size: 1rem;
+    }
+}
