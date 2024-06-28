@@ -1,4 +1,4 @@
-from nicegui import ui
+from nicegui import ui, app
 import openai
 import logging
 import asyncio
@@ -7,9 +7,16 @@ from memory.memory import create_memory_folders, store_in_stm, DialogEntry
 from agi import AGI
 from api import APIManager
 from chatter import GPT4o, GroqModel
+from fastapi.staticfiles import StaticFiles
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
+
+# Serve static files from the 'gfx' directory
+app.mount('/gfx', StaticFiles(directory='gfx'), name='gfx')
+
+# Serve the CSS file
+app.mount('/static', StaticFiles(directory='static'), name='static')
 
 class FundamentalAGI:
     def __init__(self):
@@ -79,21 +86,20 @@ class FundamentalAGI:
         self.agi = AGI(chatter)
         logging.debug("AGI initialized")
 
-    def get_solution_from_agi(self, prompt):
+    def get_conclusion_from_agi(self, prompt):
         if self.agi is None:
             ui.notify("Please initialize AGI with an API key first.")
             return "AGI not initialized."
         self.agi.reasoning.add_premise(prompt)
-        solution = self.agi.reasoning.draw_conclusion()
-        return solution
+        conclusion = self.agi.reasoning.draw_conclusion()
+        return conclusion
 
-    def perceive_environment(self):
-        agi_prompt = input("Enter the problem to solve (or type 'exit' to quit): ")
+    def perceive_environment(self, agi_prompt):
         return agi_prompt
 
     def communicate_response(self, conclusion):
         logging.info(f"Communicating response: {conclusion}")
-        print(conclusion)
+        return conclusion
 
 fundamental_agi = FundamentalAGI()
 
@@ -111,20 +117,33 @@ def main():
 
         try:
             loop = asyncio.get_event_loop()
-            solution = await loop.run_in_executor(executor, fundamental_agi.get_solution_from_agi, question)
+            conclusion = await loop.run_in_executor(executor, fundamental_agi.get_conclusion_from_agi, question)
             response_message.clear()
             with response_message:
-                ui.html(solution)
+                ui.html(conclusion)
             await ui.run_javascript('window.scrollTo(0, document.body.scrollHeight)', timeout=5.0)
+
+            # Store the dialog entry
+            entry = DialogEntry(question, conclusion)
+            store_in_stm(entry)
         except Exception as e:
-            logging.error(f"Error getting solution from funAGI: {e}")
-            log.push(f"Error getting solution from funAGI: {e}")
+            logging.error(f"Error getting conclusion from funAGI: {e}")
+            log.push(f"Error getting conclusion from funAGI: {e}")
         finally:
             message_container.remove(spinner)  # Correctly remove the spinner
 
-    ui.add_css(r'a:link, a:visited {color: inherit !important; text-decoration: none; font-weight: 500}')
-    ui.query('.q-page').classes('flex')
-    ui.query('.nicegui-content').classes('w-full')
+    # Link the external stylesheet
+    ui.add_head_html('<link rel="stylesheet" href="/static/style.css">')
+
+    # Initialize dark mode toggle
+    dark_mode = ui.dark_mode()
+
+    async def toggle_dark_mode():
+        dark_mode.value = not dark_mode.value
+        dark_mode_toggle.text = 'Light Mode' if dark_mode.value else 'Dark Mode'
+
+    with ui.row().classes('justify-end w-full p-4'):
+        dark_mode_toggle = ui.button('Dark Mode', on_click=toggle_dark_mode)
 
     with ui.tabs().classes('w-full') as tabs:
         chat_tab = ui.tab('chat')
@@ -147,12 +166,12 @@ def main():
             global keys_container
             keys_container = ui.column().classes('w-full')
 
-    with ui.footer().classes('bg-white'), ui.column().classes('w-full max-w-3xl mx-auto my-6'):
+    with ui.footer().classes('bg-white'), ui.column().classes('w-full max-w-3xl mx-auto my-6 input-area'):
         with ui.row().classes('w-full no-wrap items-center'):
             placeholder = 'Enter your prompt here'
             text = ui.input(placeholder=placeholder).props('rounded outlined input-class=mx-3') \
                 .classes('w-full self-center').on('keydown.enter', send)
-        ui.markdown('[funAGI](https://github.com/pythaiml/funAGI)').classes('text-xs self-end mr-8 m-[-1em] text-primary')
+        ui.markdown('[funAGI](https://github.com/autoGLM/funAGI)').classes('text-xs self-end mr-8 m-[-1em] text-primary')
 
 logging.debug("starting funAGI")
 ui.run(title='funAGI')
