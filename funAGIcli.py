@@ -1,6 +1,6 @@
 import openai
 import logging
-from memory import create_memory_folders, store_in_stm, DialogEntry
+from memory.memory import create_memory_folders, store_in_stm, DialogEntry
 from agi import AGI
 from api import APIManager
 from chatter import GPT4o, GroqModel
