@@ -2,7 +2,7 @@ import itertools
 import logging
 import datetime
 import pathlib
-from memory import create_memory_folders, save_valid_truth, store_in_stm, DialogEntry
+from memory.memory import create_memory_folders, save_valid_truth, store_in_stm, DialogEntry
 
 class LogicTables:
     def __init__(self):
