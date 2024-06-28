@@ -1,7 +1,7 @@
 import logging
 from SocraticReasoning import SocraticReasoning
 from logic import LogicTables
-from memory import store_in_stm, DialogEntry
+from memory.memory import store_in_stm, DialogEntry
 from chatter import GPT4o, Groq
 
 class AGI:
