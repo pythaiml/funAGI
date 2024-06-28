@@ -1,3 +1,4 @@
+```bash
 git clone https://github.com/pythaiml/funAGI/
 cd funAGI
 python3 -m venv fun
@@ -7,3 +8,4 @@ pip install -r requirements.txt
 python3 funAGIcli.py
 # start the UIUX version
 python3 funAGI.py
+```
