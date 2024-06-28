@@ -14,7 +14,7 @@ class GPT4o:
             response = openai.chat.completions.create(
                 model=model,
                 messages=[
-                    {"role": "system", "content": "you are openmind the easy action event agi solution creator."},
+                    {"role": "system", "content": ""},
                     {"role": "user", "content": prompt}
                 ]
             )
@@ -33,7 +33,7 @@ class GroqModel:
         try:
             chat_completion = self.client.chat.completions.create(
                 messages=[
-                    {"role": "system", "content": "you are openmind the easy action event agi solution creator."},
+                    {"role": "system", "content": ""},
                     {"role": "user", "content": prompt}
                 ],
                 model=model,
@@ -53,10 +53,10 @@ class OllamaModel:
 
     def generate_response(self, knowledge, model="llama2"):
         prompt = [
-            {"role": "system", "content": "openmindx"},
-            {"role": "assistant", "content": "agi"},
-            {"role": "tool", "content": "autonomous general learning model"},
-            {"role": "user", "content": f"autonomous general intelligence return solution: {knowledge}."}
+            {"role": "system", "content": ""},
+            {"role": "assistant", "content": ""},
+            {"role": "tool", "content": ""},
+            {"role": "user", "content": f"{knowledge}"}
         ]
         try:
             response = self.client.chat.completions.create(
