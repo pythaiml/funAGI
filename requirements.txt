@@ -7,6 +7,9 @@ groq
 # For loading environment variables from a .env file.
 python-dotenv
 
+# for UI integration as fastapi
+nicegui
+
 # For fast JSON processing.
 ujson
 
