@@ -1,53 +1,93 @@
 import logging
+import os
 import pathlib
 import ujson
 from chatter import GPT4o, GroqModel, OllamaModel
 from logic import LogicTables
 from memory.memory import create_memory_folders, store_in_stm, DialogEntry
+from api import APIManager
 
 class SocraticReasoning:
     def __init__(self, chatter):
-        self.premises = []
+        """
+        Initializes the SocraticReasoning instance with necessary configurations.
+        
+        Args:
+            chatter: An instance of the model used for generating responses.
+        """
+        self.premises = []  # List to hold premises
         self.logger = logging.getLogger('SocraticReasoning')
-        self.logger.setLevel(logging.DEBUG)                            # set to DEBUG to capture all SocraticReasoing logs
-        file_handler = logging.FileHandler('./mindx/socraticlog.txt')  # save socraticreasoning to ./mindx/socraticlog.txt
-        self.premises_file = './mindx/premises.json'                   # save premises to ./mindx/premises.json
-        self.not_premises_file = './mindx/notpremise.json'             # save not premise to ./mindx/notpremise.json
+        self.logger.setLevel(logging.DEBUG)  # Set to DEBUG to capture all SocraticReasoning logs
+
+        # Ensure the logs directory exists
+        logs_dir = './memory/logs'
+        os.makedirs(logs_dir, exist_ok=True)
+
+        # File handler for saving Socratic Reasoning logs
+        file_handler = logging.FileHandler(os.path.join(logs_dir, 'socraticlogs.txt'))
         file_handler.setLevel(logging.DEBUG)
         file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         file_handler.setFormatter(file_formatter)
-        
+
         # Stream handler to suppress lower-level logs in the terminal
         stream_handler = logging.StreamHandler()
-        stream_handler.setLevel(logging.CRITICAL)                      # show only critical logs in the terminal
+        stream_handler.setLevel(logging.CRITICAL)  # Show only critical logs in the terminal
         stream_formatter = logging.Formatter('%(message)s')
         stream_handler.setFormatter(stream_formatter)
 
+        # Adding handlers to the logger
         self.logger.addHandler(file_handler)
         self.logger.addHandler(stream_handler)
 
-        self.max_tokens = 100                                         # default max tokens for socratic premise from add_premise(statement)
-        self.chatter = chatter
-        self.logic_tables = LogicTables()
-        self.dialogue_history = []
-        self.logical_conclusion = ""                                  # conclusion is solution
+        # File paths for saving premises, non-premises, conclusions, and truth tables
+        self.premises_file = './memory/logs/premises.json'
+        self.not_premises_file = './memory/logs/notpremise.json'
+        self.conclusions_file = './memory/logs/conclusions.txt'  # Path to save conclusions
+        self.truth_tables_file = './memory/logs/truth_tables.json'  # Path to save truth tables
 
-        create_memory_folders()                                       # ensure folders are created
+        self.max_tokens = 100  # Default max tokens for Socratic premise from add_premise(statement)
+        self.chatter = chatter  # Chatter model for generating responses
+        self.logic_tables = LogicTables()  # Logic tables for reasoning
+        self.dialogue_history = []  # List to hold the history of dialogues
+        self.logical_conclusion = ""  # Variable to store the conclusion
+
+        create_memory_folders()  # Ensure memory folders are created
 
     def log(self, message, level='info'):
+        """
+        Logs a message with a specified level.
+
+        Args:
+            message: The message to be logged.
+            level: The level of logging ('info' or 'error').
+        """
         if level == 'info':
             self.logger.info(message)
         elif level == 'error':
             self.logger.error(message)
-        self.store_log_in_mindx(message, level)                       # save socraticreasoning to ./mindx/socraticlog.txt
+        self.log_errors(message, level)  # Save Socratic reasoning to ./memory/logs/socraticlogs.txt
 
-    def store_log_in_mindx(self, message, level):
-        mindx_path = './mindx/errors/log.txt'
-        pathlib.Path(mindx_path).parent.mkdir(parents=True, exist_ok=True)
-        with open(mindx_path, 'a') as file:
+    def log_errors(self, message, level):
+        """
+        Stores error logs in ./memory/logs/errorlogs.txt.
+
+        Args:
+            message: The error message to be logged.
+            level: The level of the error.
+        """
+        error_logs_path = './memory/logs/errorlogs.txt'
+        pathlib.Path(error_logs_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(error_logs_path, 'a') as file:
             file.write(f"{level.upper()}: {message}\n")
 
     def log_not_premise(self, message, level='info'):
+        """
+        Logs messages that are not considered premises.
+
+        Args:
+            message: The message to be logged.
+            level: The level of logging.
+        """
         not_premises_path = self.not_premises_file
         pathlib.Path(not_premises_path).parent.mkdir(parents=True, exist_ok=True)
         entry = {"level": level.upper(), "message": message}
@@ -62,65 +102,75 @@ class SocraticReasoning:
             ujson.dump(logs, file, indent=2)
 
     def save_premises(self):
+        """
+        Saves the current list of premises to a JSON file.
+        """
         pathlib.Path(self.premises_file).parent.mkdir(parents=True, exist_ok=True)
         with open(self.premises_file, 'w') as file:
             ujson.dump(self.premises, file, indent=2)
 
     def add_premise(self, premise):
-        if self.parse_statement(premise):
-            self.premises.append(premise)
-            #self.log(f'Added premise: {premise}')
-            self.save_premises()
+        """
+        Adds a premise to the list if valid and saves the premises.
+
+        Args:
+            premise: The premise to be added.
+        """
+        if self.parse_statement(premise):  # Check if the premise is valid
+            self.premises.append(premise)  # Add the premise to the list
+            self.save_premises()  # Save the updated list of premises
         else:
-            #self.log(f'Invalid premise: {premise}', level='error')                 # uncomment to log not premise to terminal
-            self.log_not_premise(f'Invalid premise: {premise}', level='error')      # save not premise to ./mindx/notpremise.json
+            self.log_not_premise(f'Invalid premise: {premise}', level='error')  # Log invalid premise
 
     def parse_statement(self, statement):
-        # Simple parser to validate statements
-        return isinstance(statement, str) and len(statement) > 0
+        """
+        Validates a statement to check if it can be a premise.
+
+        Args:
+            statement: The statement to be validated.
+
+        Returns:
+            bool: True if the statement is valid, False otherwise.
+        """
+        return isinstance(statement, str) and len(statement) > 0  # Check if the statement is a non-empty string
 
     def challenge_premise(self, premise):
-        if premise in self.premises:
-            self.premises.remove(premise)
-            self.log(f'Challenged and removed premise: {premise}')
-            self.remove_equivalent_premises(premise)
-            self.save_premises()                                                    # save is premise to ./mindx/premises.json
+        """
+        Challenges and removes a premise from the list if it exists.
+
+        Args:
+            premise: The premise to be challenged.
+        """
+        if premise in self.premises:  # Check if the premise exists in the list
+            self.premises.remove(premise)  # Remove the premise from the list
+            self.log(f'Challenged and removed premise: {premise}')  # Log the removal
+            self.remove_equivalent_premises(premise)  # Remove equivalent premises
+            self.save_premises()  # Save the updated list of premises
         else:
-            self.log_not_premise(f'Premise not found: {premise}', level='error')    # save not premise to ./mindx/notpremise.json
+            self.log_not_premise(f'Premise not found: {premise}', level='error')  # Log if premise not found
 
     def remove_equivalent_premises(self, premise):
+        """
+        Removes premises that are logically equivalent to the challenged premise.
+
+        Args:
+            premise: The premise to be checked for equivalence.
+        """
         equivalent_premises = [p for p in self.premises if self.logic_tables.unify_variables(premise, p)]
         for p in equivalent_premises:
-            self.premises.remove(p)
-            self.log_not_premise(f'Removed equivalent premise: {p}')
-        self.save_premises()
-
-#    def draw_conclusion(self):
-#        if not self.premises:
-#            self.log('No premises available for logic as conclusion.', level='error')
-#            return "No premises available for logic as conclusion."
-#
-#        premise_text = " ".join(f"{premise}" for premise in self.premises)
-#        prompt = f"{premise_text} Conclusion?"
-#
-#        self.logical_conclusion = self.chatter.generate_response(prompt)
-#        # Commented out to avoid duplication in the response
-#        #self.log(f"{self.logical_conclusion}")  # log the conclusion directly in the terminal response
-#
-#        if not self.validate_conclusion():
-#            #self.log('Invalid conclusion. Revise.', level='error')
-#            self.log_not_premise('Invalid conclusion. Revise.', level='error')
-#
-#        conclusion_entry = {"premises": self.premises, "conclusion": self.logical_conclusion}
-#        pathlib.Path(self.premises_file).parent.mkdir(parents=True, exist_ok=True)
-#        with open(self.premises_file, 'w') as file:
-#            ujson.dump(conclusion_entry, file, indent=2)
-#
-#        return premise_text + " " + self.logical_conclusion
+            self.premises.remove(p)  # Remove equivalent premise
+            self.log_not_premise(f'Removed equivalent premise: {p}')  # Log removal of equivalent premise
+        self.save_premises()  # Save the updated list of premises
 
     def draw_conclusion(self):
-        if not self.premises:
-            self.log('No premises available for logic as conclusion.', level='error')
+        """
+        Draws a conclusion based on the current list of premises.
+
+        Returns:
+            str: The conclusion derived from the premises.
+        """
+        if not self.premises:  # Check if there are no premises
+            self.log('No premises available for logic as conclusion.', level='error')  # Log the absence of premises
             return "No premises available for logic as conclusion."
 
         # Create a single string from the premises
@@ -132,37 +182,74 @@ class SocraticReasoning:
         # Process the response to get the conclusion
         conclusion = raw_response.strip()
 
-        self.logical_conclusion = conclusion
+        self.logical_conclusion = conclusion  # Store the conclusion
 
-        if not self.validate_conclusion():
-            self.log_not_premise('Invalid conclusion. Revise.', level='error')
-  
+        if not self.validate_conclusion():  # Validate the conclusion
+            self.log_not_premise('Invalid conclusion. Revise.', level='error')  # Log invalid conclusion
+
+        # Save the conclusion along with premises
         conclusion_entry = {"premises": self.premises, "conclusion": self.logical_conclusion}
         pathlib.Path(self.premises_file).parent.mkdir(parents=True, exist_ok=True)
         with open(self.premises_file, 'w') as file:
             ujson.dump(conclusion_entry, file, indent=2)
 
-        # Return only the conclusion without the premise text
-        return self.logical_conclusion
+        # Log the conclusion to conclusions.txt
+        pathlib.Path(self.conclusions_file).parent.mkdir(parents=True, exist_ok=True)
+        with open(self.conclusions_file, 'a') as file:
+            file.write(f"Conclusion: {self.logical_conclusion}\n")
 
+        return self.logical_conclusion  # Return the conclusion
 
     def validate_conclusion(self):
-        return self.logic_tables.tautology(self.logical_conclusion)
+        """
+        Validates the logical conclusion.
+
+        Returns:
+            bool: True if the conclusion is valid, False otherwise.
+        """
+        return self.logic_tables.tautology(self.logical_conclusion)  # Validate using logic tables
 
     def update_logic_tables(self, variables, expressions, valid_truths):
+        """
+        Updates the logic tables with new variables, expressions, and valid truths.
+
+        Args:
+            variables: The logical variables.
+            expressions: The logical expressions.
+            valid_truths: The valid truths for the logic table.
+        """
         self.logic_tables.variables = variables
         self.logic_tables.expressions = expressions
         self.logic_tables.valid_truths = valid_truths
 
+        # Log the truth tables to truth_tables.json
+        truth_tables_entry = {
+            "variables": variables,
+            "expressions": expressions,
+            "valid_truths": valid_truths
+        }
+        pathlib.Path(self.truth_tables_file).parent.mkdir(parents=True, exist_ok=True)
+        with open(self.truth_tables_file, 'w') as file:
+            ujson.dump(truth_tables_entry, file, indent=2)
+
     def set_max_tokens(self, max_tokens):
+        """
+        Sets the maximum number of tokens for generating a response.
+
+        Args:
+            max_tokens: The maximum number of tokens.
+        """
         self.max_tokens = max_tokens
         self.log(f"Max tokens set to: {max_tokens}")
 
     def interact(self):
+        """
+        Interacts with the user to add, challenge premises, and draw conclusions.
+        """
         while True:
             self.log("\nCommands: add, challenge, conclude, set_tokens, exit")
             cmd = input("> ").strip().lower()
-            
+
             if cmd == 'exit':
                 self.log('Exiting Socratic Reasoning.')
                 break
@@ -183,13 +270,22 @@ class SocraticReasoning:
                     self.log("Invalid number of tokens.", level='error')
                     self.log_not_premise("Invalid number of tokens.", level='error')
             else:
-                #self.log('Invalid command.', level='error')
                 self.log_not_premise('Invalid command.', level='error')
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    chatter = GPT4o('your_api_key_here')  # Update with appropriate API key management
-    socratic_reasoning = SocraticReasoning(chatter)
+    api_manager = APIManager()  # Initialize API manager to handle API keys
+    openai_key = api_manager.get_api_key('openai')
+    groq_key = api_manager.get_api_key('groq')
+    
+    if openai_key:
+        chatter = GPT4o(openai_key)  # Use OpenAI model if key is available
+    elif groq_key:
+        chatter = GroqModel(groq_key)  # Use Groq model if key is available
+    else:
+        raise ValueError("No suitable API key found. Please add an API key.")
+
+    socratic_reasoning = SocraticReasoning(chatter)  # Initialize SocraticReasoning with the selected model
 
     # Example usage
     statements = [
@@ -198,9 +294,8 @@ if __name__ == "__main__":
     ]
 
     for statement in statements:
-        socratic_reasoning.add_premise(statement)
+        socratic_reasoning.add_premise(statement)  # Add each statement as a premise
 
-    conclusion = socratic_reasoning.draw_conclusion()
+    conclusion = socratic_reasoning.draw_conclusion()  # Draw a conclusion based on the premises
     print(conclusion)
-    socratic_reasoning.interact()
-
+    socratic_reasoning.interact()  # Start the interactive loop
