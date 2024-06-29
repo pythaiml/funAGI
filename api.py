@@ -58,3 +58,17 @@ class APIManager:
         else:
             print("No API keys stored.")
 
+    def manage_api_keys(self):
+        while True:
+            self.list_api_keys()
+            action = input("Choose an action: (a) Add API key, (d) Delete API key, (l) List API keys, (Press Enter to continue): ").strip().lower()
+            if not action:
+                break
+            elif action == 'a':
+                self.add_api_key_interactive()
+            elif action == 'd':
+                api_name = input("Enter the API name to delete: ").strip()
+                if api_name:
+                    self.remove_api_key(api_name)
+            elif action == 'l':
+                self.list_api_keys()
