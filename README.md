@@ -2,7 +2,7 @@
 fundamental AGI point of departure agi.py logic.py and SocraticReasoning.py using api.py with memory.py for folder and key management<br />
 debug environment now includes logging for deeper understanding of the reasoning process and troubleshooting<br />
 original implmentation of funAGI has been archived at <a href="https://github.com/autoGLM/funAGI">github.com/autoGLM/funAGI</a><br />
-This version is going deeper into the "workings" of the SocraticReasoning technique to include logic.py tables and bdi.py with an even more "verbose" logging method to follow premise to conclusion workflow. api.py has been updated to use .env for key storage.<br />
+This version of funAGI.py is going deeper into the "workings" of the SocraticReasoning technique to include logic.py tables and bdi.py with an even more "verbose" logging method to follow premise to conclusion workflow. api.py has been updated to use .env for key storage.<br />
 
 Work has begun to create funAGIcli.py as the terminal interaction and funAGI.py as the UIUX<br />
 expect breaking changed use at own risk<br />
