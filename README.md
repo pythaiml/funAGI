@@ -1,5 +1,5 @@
 # funAGI
-The funAGI workflow integrates memory management, UI/UX design, core AGI logic, user interaction interfaces, reasoning capabilities, API development, and communication modules to create a robust and scalable AGI system. Each component plays a crucial role in enabling the system to learn, adapt, and interact intelligently with its environment. By following the modular framework, developers can extend and enhance FunAGI's capabilities, making it a versatile tool for autonomous general intelligence development
+The funAGI workflow integrates memory management, UI/UX design, core AGI logic, user interaction interfaces, reasoning capabilities, API development, and communication modules to create a robust and scalable AGI system. Each component plays a crucial role in enabling the system to learn, adapt, and interact intelligently with its environment. By following the modular framework, developers can extend and enhance FunAGI's capabilities, making it a versatile tool for fundamental Autonomous General Intelligence development
 
 # first output from "create a framework for AGI from mixtral using groq includes<br />
 
