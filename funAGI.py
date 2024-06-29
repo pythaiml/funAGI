@@ -3,7 +3,7 @@ import openai
 import logging
 import asyncio
 import concurrent.futures
-from memory.memory import create_memory_folders, store_in_stm, DialogEntry
+from memory import create_memory_folders, store_in_stm, DialogEntry
 from agi import AGI
 from api import APIManager
 from chatter import GPT4o, GroqModel
@@ -63,7 +63,7 @@ class FundamentalAGI:
                 with keys_container:
                     ui.label(f"{service}: {key[:4]}...{key[-4:]}").classes('flex-1')
                     ui.button('Delete', on_click=lambda s=service: self.delete_api_key(s)).classes('ml-4')
-            ui.notify(f'Stored API keys:\n' + "\n".join([f"{service}: {key[:4]}...{key[-4:]}" for service, key in keys_list]))
+            ui.notify('Stored API keys:\n' + "\n".join([f"{service}: {key[:4]}...{key[-4:]}" for service, key in keys_list]))
         else:
             ui.notify('No API keys in storage')
             keys_container.clear()
@@ -86,33 +86,19 @@ class FundamentalAGI:
         self.agi = AGI(chatter)
         logging.debug("AGI initialized")
 
-    def main_loop(self):
-        while True:
-            environment_data = self.perceive_environment()
-            if environment_data.lower() == 'exit':
-                break
-
-            self.agi.reasoning.add_premise(environment_data)
-            conclusion = self.agi.reasoning.draw_conclusion()
-            self.communicate_response(conclusion)
-
-            entry = DialogEntry(environment_data, conclusion)
-            store_in_stm(entry)
-
-    def perceive_environment(self):
-        agi_prompt = input("Enter the problem to solve (or type 'exit' to quit): ")
-        return agi_prompt
-
-    def communicate_response(self, conclusion):
-        logging.info(f"Communicating response: {conclusion}")
-        print(conclusion)
-
     def get_conclusion_from_agi(self, prompt):
         if self.agi is None:
             ui.notify("Please initialize AGI with an API key first.")
             return "AGI not initialized."
         self.agi.reasoning.add_premise(prompt)
         conclusion = self.agi.reasoning.draw_conclusion()
+        return conclusion
+
+    def perceive_environment(self, agi_prompt):
+        return agi_prompt
+
+    def communicate_response(self, conclusion):
+        logging.info(f"Communicating response: {conclusion}")
         return conclusion
 
 fundamental_agi = FundamentalAGI()
@@ -190,10 +176,5 @@ def main():
 logging.debug("starting funAGI")
 ui.run(title='funAGI')
 
-def main():
-    fundamental_agi = FundamentalAGI()
-    fundamental_agi.main_loop()
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
-
