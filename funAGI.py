@@ -8,6 +8,7 @@ from agi import AGI
 from api import APIManager
 from chatter import GPT4o, GroqModel
 from fastapi.staticfiles import StaticFiles
+import os
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -101,6 +102,13 @@ class FundamentalAGI:
         logging.info(f"Communicating response: {conclusion}")
         return conclusion
 
+    def read_log_file(self, file_path):
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as file:
+                return file.read()
+        else:
+            return f"Log file {file_path} does not exist."
+
 fundamental_agi = FundamentalAGI()
 
 @ui.page('/')
@@ -144,6 +152,24 @@ def main():
 
     with ui.row().classes('justify-end w-full p-4'):
         dark_mode_toggle = ui.button('Dark Mode', on_click=toggle_dark_mode)
+        # Adding log file buttons
+        log_files = {
+            "Premises Log": "./memory/logs/premises.json",
+            "Not Premise Log": "./memory/logs/notpremise.json",
+            "Conclusions Log": "./memory/logs/conclusions.txt",
+            "Truth Tables Log": "./memory/logs/truth_tables.json",
+            "Decisions Log": "./memory/logs/decisions.json"
+        }
+
+        for log_name, log_path in log_files.items():
+            ui.button(log_name, on_click=lambda path=log_path: view_log(path)).classes('ml-2')
+
+    # Function to view log files
+    def view_log(file_path):
+        log_content = fundamental_agi.read_log_file(file_path)
+        log_container.clear()  # Clear the existing log content
+        with log_container:
+            ui.markdown(log_content).classes('w-full')
 
     with ui.tabs().classes('w-full') as tabs:
         chat_tab = ui.tab('chat')
@@ -153,6 +179,7 @@ def main():
         message_container = ui.tab_panel(chat_tab).classes('items-stretch')
         with ui.tab_panel(logs_tab):
             log = ui.log().classes('w-full h-full')
+            log_container = ui.column().classes('w-full')
         with ui.tab_panel(api_tab):
             ui.label('Manage API Keys').classes('text-lg font-bold')
             with ui.row().classes('items-center'):
