@@ -14,9 +14,10 @@ still need to have the response be towards the participant instead of the contex
 
 1. knowledge representation and reasoning: the ability to represent and reason about complex knowledge, including objects, relationships, and events in the world. 2. natural language understanding and generation: the ability to understand and generate natural language in order to communicate effectively with humans. 3. perception and action: the ability to perceive and interact with the physical world through sensors and actuators. 4. learning and adaptation: the ability to learn and adapt to new situations and environments. 5. ethics and values: the incorporation of ethical principles and values to guide decision-making and behavior. 6. safety and security: the incorporation of safety and security measures to prevent unintended behavior and protect against malicious attacks. 7. scalability and efficiency: the ability to handle large amounts of data and complex tasks without requiring excessive computational resources. 8. verifiability and explainability: the ability to prove the correctness and trustworthiness of the agi system, as well as the ability to provide clear explanations of its reasoning and decision-making processes. these components are all crucial for the development of a safe, ethical, and beneficial agi system. however, it is important to note that this framework is not exhaustive, and that the development of agi will likely involve many additional considerations and challenges. for example, agi systems will need to be able to handle uncertainty and ambiguity in a way that is consistent with human reasoning and decision-making. they will also need to be able to deal with missing or incomplete information, and to be able to learn from and make decisions based on limited data. additionally, agi systems will need to be able to interact and cooperate with humans in a way that is safe and beneficial for both parties. this will require the development of effective human-machine interfaces and the ability for agi systems to understand and respond to human emotions, intentions, and social cues. another important consideration is the potential impact of agi on society and the economy. as agi systems become more capable, they may have the potential to disrupt traditional industries and occupations, and to create new ones.
 
-UIUX has been split into two version<br />
-funAGIcli.py will maintain the terminal based interaction<br />
-funAGI.py is the UIUX graphical expression<br />
+
+UIUX has been split into two versions<br />
+<b>funAGIcli.py</b> will maintain the terminal based interaction<br />
+<b>funAGI.py</b> is the UIUX graphical expression<br />
 
 
 FundamentalAGI Project Setup
