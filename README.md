@@ -1,13 +1,5 @@
 # funAGI
-fundamental AGI point of departure agi.py logic.py and SocraticReasoning.py using api.py with memory.py for folder and key management<br />
-debug environment now includes logging for deeper understanding of the reasoning process and troubleshooting<br />
-original implmentation of funAGI has been archived at <a href="https://github.com/autoGLM/funAGI">github.com/autoGLM/funAGI</a><br />
-This version of funAGI.py is going deeper into the "workings" of the SocraticReasoning technique to include logic.py tables and bdi.py with an even more "verbose" logging method to follow premise to conclusion workflow. api.py has been updated to use .env for key storage.<br />
-
-Work has begun to create funAGIcli.py as the terminal interaction and funAGI.py as the UIUX<br />
-expect breaking changed use at own risk<br />
-
-still need to have the response be towards the participant instead of the context of the internal reasoning<br />
+The funAGI workflow integrates memory management, UI/UX design, core AGI logic, user interaction interfaces, reasoning capabilities, API development, and communication modules to create a robust and scalable AGI system. Each component plays a crucial role in enabling the system to learn, adapt, and interact intelligently with its environment. By following the modular framework, developers can extend and enhance FunAGI's capabilities, making it a versatile tool for autonomous general intelligence development
 
 # first output from "create a framework for AGI from mixtral using groq includes<br />
 
