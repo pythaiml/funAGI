@@ -2,6 +2,7 @@ import logging
 import os
 import pathlib
 import ujson
+from datetime import datetime
 from chatter import GPT4o, GroqModel, OllamaModel
 from logic import LogicTables
 from memory.memory import create_memory_folders, store_in_stm, DialogEntry
@@ -134,6 +135,20 @@ class SocraticReasoning:
         """
         return isinstance(statement, str) and len(statement) > 0  # Check if the statement is a non-empty string
 
+    def generate_new_premise(self, current_premises):
+        """
+        Generates a new premise based on the current premises.
+
+        Args:
+            current_premises: The list of current premises.
+
+        Returns:
+            str: A new premise generated from the current premises.
+        """
+        premise_text = " ".join(f"{premise}" for premise in current_premises)
+        new_premise = self.chatter.generate_response(premise_text)
+        return new_premise.strip()
+
     def challenge_premise(self, premise):
         """
         Challenges and removes a premise from the list if it exists.
@@ -173,19 +188,33 @@ class SocraticReasoning:
             self.log('No premises available for logic as conclusion.', level='error')  # Log the absence of premises
             return "No premises available for logic as conclusion."
 
-        # Create a single string from the premises
-        premise_text = " ".join(f"{premise}" for premise in self.premises)
+        additional_premises_count = 0  # Counter for additional premises
 
-        # Use the premise_text as the input (knowledge) for generating a response
-        raw_response = self.chatter.generate_response(premise_text)
+        # Generate new premises until a valid conclusion is drawn or the maximum limit is reached
+        while additional_premises_count < 5:
+            new_premise = self.generate_new_premise(self.premises)
+            if not self.parse_statement(new_premise):
+                self.log_not_premise(f'Invalid generated premise: {new_premise}', level='error')
+                continue
+            self.premises.append(new_premise)
+            self.save_premises()
+            additional_premises_count += 1
 
-        # Process the response to get the conclusion
-        conclusion = raw_response.strip()
+            # Create a single string from the premises
+            premise_text = " ".join(f"{premise}" for premise in self.premises)
 
-        self.logical_conclusion = conclusion  # Store the conclusion
+            # Use the premise_text as the input (knowledge) for generating a response
+            raw_response = self.chatter.generate_response(premise_text)
 
-        if not self.validate_conclusion():  # Validate the conclusion
-            self.log_not_premise('Invalid conclusion. Revise.', level='error')  # Log invalid conclusion
+            # Process the response to get the conclusion
+            conclusion = raw_response.strip()
+
+            self.logical_conclusion = conclusion  # Store the conclusion
+
+            if self.validate_conclusion():  # Validate the conclusion
+                break
+            else:
+                self.log_not_premise('Invalid conclusion. Generating more premises.', level='error')
 
         # Save the conclusion along with premises
         conclusion_entry = {"premises": self.premises, "conclusion": self.logical_conclusion}
@@ -196,7 +225,16 @@ class SocraticReasoning:
         # Log the conclusion to conclusions.txt
         pathlib.Path(self.conclusions_file).parent.mkdir(parents=True, exist_ok=True)
         with open(self.conclusions_file, 'a') as file:
-            file.write(f"Conclusion: {self.logical_conclusion}\n")
+            file.write(f"Premises: {self.premises}\nConclusion: {self.logical_conclusion}\n")
+
+        # Log the final premises to conclusion
+        self.log(f"Final Premises to Conclusion:\nPremises: {self.premises}\nConclusion: {self.logical_conclusion}")
+
+        # Save the valid conclusion as a truth
+        self.save_truth(self.logical_conclusion)
+
+        # Clear the premises list for the next round
+        self.premises = []
 
         return self.logical_conclusion  # Return the conclusion
 
@@ -208,6 +246,22 @@ class SocraticReasoning:
             bool: True if the conclusion is valid, False otherwise.
         """
         return self.logic_tables.tautology(self.logical_conclusion)  # Validate using logic tables
+
+    def save_truth(self, truth):
+        """
+        Saves the valid conclusion as a truth in the truth tables.
+
+        Args:
+            truth: The truth to be saved.
+        """
+        truth_tables_entry = {
+            "truth": truth,
+            "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+        pathlib.Path(self.truth_tables_file).parent.mkdir(parents=True, exist_ok=True)
+        with open(self.truth_tables_file, 'a') as file:
+            ujson.dump(truth_tables_entry, file, indent=2)
+            file.write("\n")
 
     def update_logic_tables(self, variables, expressions, valid_truths):
         """
@@ -231,6 +285,16 @@ class SocraticReasoning:
         pathlib.Path(self.truth_tables_file).parent.mkdir(parents=True, exist_ok=True)
         with open(self.truth_tables_file, 'w') as file:
             ujson.dump(truth_tables_entry, file, indent=2)
+
+        # Save a timestamped file in ./memory/truth
+        timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+        belief_timestamp_file = f'./memory/truth/belief_{timestamp}.json'
+        pathlib.Path(belief_timestamp_file).parent.mkdir(parents=True, exist_ok=True)
+        with open(belief_timestamp_file, 'w') as file:
+            ujson.dump(truth_tables_entry, file, indent=2)
+
+        # Add a log entry to confirm the update
+        self.logger.info("Updated logic tables: %s", truth_tables_entry)
 
     def set_max_tokens(self, max_tokens):
         """
