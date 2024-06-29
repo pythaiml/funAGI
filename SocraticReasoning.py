@@ -3,7 +3,7 @@ import pathlib
 import ujson
 from chatter import GPT4o, GroqModel, OllamaModel
 from logic import LogicTables
-from memory import create_memory_folders, store_in_stm, DialogEntry
+from memory.memory import create_memory_folders, store_in_stm, DialogEntry
 
 class SocraticReasoning:
     def __init__(self, chatter):
