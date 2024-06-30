@@ -215,7 +215,7 @@ as timestamped instruction / response<br />
 this is the bare bones working version of funAGI with error logging and first errors to fix from first working deployment. fundamental funAGI.py point of departure version 1
 
 ```bash
-git clone https://github.com/autoGLM/funAGI/
+git clone https://github.com/pythaiml/funAGI/
 cd funAGI
 python3 -m venv fun
 source fun/bin/activate
