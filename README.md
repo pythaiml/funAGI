@@ -19,13 +19,14 @@ See also <a href="https://rage.pythai.net/draw_conclusionself/">draw_conclusion(
 
 # project structure
 
-    funAGI.py: Main script to run the AGI.
-    agi.py: Core AGI logic.
-    api.py: API key management.
-    bdi.py: BDI (Belief-Desire-Intention) model.
-    chatter.py: Interface for different chat models.
-    logic.py: Logic table management and evaluation.
-    memory.py: Memory management for storing dialogues and truth values.
+    funAGI.py: main script for fundamental AGI
+    funAGIcli.py run the terminal interaction version
+    agi.py: Core AGI logic
+    api.py: API key management
+    bdi.py: BDI (Belief-Desire-Intention) model
+    chatter.py: Interface for different chat models
+    logic.py: Logic table management and evaluation
+    memory.py: Memory management for storing dialogues and truth values
     SocraticReasoning.py: Socratic Reasoning from logic
 
 # agi.py AGI workflow
