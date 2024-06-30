@@ -220,8 +220,8 @@ from mixtral using groq produced this reasonable response for meeting AGI framew
 ```bash
 git clone https://github.com/pythaiml/funAGI/
 cd funAGI
-python3 -m venv fun
-source fun/bin/activate
+python3 -m venv agi
+source agi/bin/activate
 pip install -r requirements.txt
 # activate command line interaction (optional)
 python3 funAGIcli.py
