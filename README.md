@@ -26,7 +26,7 @@ See also <a href="https://rage.pythai.net/draw_conclusionself/">draw_conclusion(
     chatter.py: Interface for different chat models.
     logic.py: Logic table management and evaluation.
     memory.py: Memory management for storing dialogues and truth values.
-    SocraticReasoning.py: Socratic reasoning engine for the AGI.
+    SocraticReasoning.py: Socratic Reasoning from logic
 
 # agi.py AGI workflow
 
