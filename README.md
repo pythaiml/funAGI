@@ -218,6 +218,9 @@ cd funAGI
 python3 -m venv fun
 source fun/bin/activate
 pip install -r requirements.txt
+# activate command line interaction (optional)
+python3 funAGIcli.py
+# active graphical UIUX
 python3 funAGI.py
 ```
 
