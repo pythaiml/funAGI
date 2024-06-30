@@ -12,7 +12,7 @@ funAGI is designed to create a robust and scalable fundamental augmented generat
 
 # FundamentalAGI Project Setup
 
-For a deeper dive into <a href="https://github.com/pythaiml/funAGI/blob/main/SocraticReasoning.py">SocraticReasoning.py</a> visit <a href="https://rage.pythai.net/understanding-socraticreasoning-py/">understanding-socraticreasoning-py</a><br />
+For a deeper dive into <a href="https://github.com/pythaiml/funAGI/blob/main/SocraticReasoning.py">SocraticReasoning.py</a> visit <a href="https://rage.pythai.net/understanding-socraticreasoning-py/">understanding-socraticreasoning</a><br />
 
 See also <a href="https://rage.pythai.net/draw_conclusionself/">draw_conclusion(self)</a><br />
 
