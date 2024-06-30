@@ -225,7 +225,7 @@ source agi/bin/activate
 pip install -r requirements.txt
 # activate command line interaction (optional)
 python3 funAGIcli.py
-# active graphical UIUX
+# active graphical UIUX (required)
 python3 funAGI.py
 ```
 
