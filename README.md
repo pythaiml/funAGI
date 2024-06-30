@@ -19,7 +19,7 @@ See also <a href="https://rage.pythai.net/draw_conclusionself/">draw_conclusion(
 
 # project structure
 
-    fundamentalAGI.py: Main script to run the AGI.
+    funAGI.py: Main script to run the AGI.
     agi.py: Core AGI logic.
     api.py: API key management.
     bdi.py: BDI (Belief-Desire-Intention) model.
