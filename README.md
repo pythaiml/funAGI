@@ -1,5 +1,5 @@
 # funAGI
-<b>fundamental augmented generative intelligence framework</a>
+<b>fundamental augmented generative intelligence framework</b>
 
 The funAGI workflow integrates memory management, UI/UX design, core AGI logic, user interaction interfaces, reasoning capabilities, API development, and communication modules to create a robust and scalable AGI system. Each modular component plays a crucial role in enabling funAGI to learn, adapt, and interact intelligently with its environment. THe modular framework is designed to be extended to enhance FunAGI's capabilities, making it a versatile tool for fundamental Autonomous General Intelligence development and integration with existing language models.
 
