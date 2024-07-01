@@ -219,7 +219,7 @@ from mixtral using groq produced this reasonable response for meeting AGI framew
 
  # requirement
  <a href="https://console.groq.com/docs/quickstart">groq API key</a> or <br />
- <a href="https://openai.com/index/openai-api/">openai API key</a> or <br />
+ <a href="https://openai.com/index/openai-api/">openai API key</a> <br />
  
  # INSTALL
 
