@@ -217,6 +217,12 @@ from mixtral using groq produced this reasonable response for meeting AGI framew
 
  welcome to fundamental augmented generative intelligence funAGI.py point of departure version breaking changes v1
 
+ # requirement
+ <a href="https://console.groq.com/docs/quickstart">groq API key</a> or <br />
+ <a href="https://openai.com/index/openai-api/">openai API key</a> or <br />
+ 
+ # INSTALL
+
 ```bash
 git clone https://github.com/pythaiml/funAGI/
 cd funAGI
