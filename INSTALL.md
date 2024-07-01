@@ -1,4 +1,4 @@
-# funAGI.py
+# funAGI.py install requires python < 3.7
 
 ```bash
 git clone https://github.com/pythaiml/funAGI/
