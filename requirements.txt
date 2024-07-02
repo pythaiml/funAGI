@@ -10,6 +10,9 @@ python-dotenv
 # for UI integration as fastapi
 nicegui
 
+# for interupt of funAGIcli by pressing the i key
+keyboard
+
 # For fast JSON processing.
 ujson
 
