@@ -185,7 +185,7 @@ class SocraticReasoning:
             str: The conclusion derived from the premises.
         """
         if not self.premises:  # Check if there are no premises
-            self.log('No premises available for logic as conclusion.', level='error')  # Log the absence of premises
+            #self.log('No premises available for logic as conclusion.', level='error')  # Log the absence of premises
             return "No premises available for logic as conclusion."
 
         current_premise = self.premises[0]  # Start with the first premise
@@ -195,7 +195,7 @@ class SocraticReasoning:
         while additional_premises_count < 5:
             new_premise = self.generate_new_premise(current_premise)
             if not self.parse_statement(new_premise):
-                self.log_not_premise(f'Invalid generated premise: {new_premise}', level='error')
+                #self.log_not_premise(f'Invalid generated premise: {new_premise}', level='error')
                 continue
             self.premises.append(new_premise)
             self.save_premises()
@@ -226,7 +226,7 @@ class SocraticReasoning:
             file.write(f"Premises: {self.premises}\nConclusion: {self.logical_conclusion}\n")
 
         # Log the final premises to conclusion
-        self.log(f"Final Premises to Conclusion:\nPremises: {self.premises}\nConclusion: {self.logical_conclusion}")
+        #self.log(f"Final Premises to Conclusion:\nPremises: {self.premises}\nConclusion: {self.logical_conclusion}")
 
         # Save the valid conclusion as a truth
         self.save_truth(self.logical_conclusion)
