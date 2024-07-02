@@ -135,17 +135,17 @@ class SocraticReasoning:
         """
         return isinstance(statement, str) and len(statement) > 0  # Check if the statement is a non-empty string
 
-    def generate_new_premise(self, current_premises):
+    def generate_new_premise(self, premise):
         """
-        Generates a new premise based on the current premises.
+        Generates a new premise based on the current premise.
 
         Args:
-            current_premises: The list of current premises.
+            premise: The current premise.
 
         Returns:
-            str: A new premise generated from the current premises.
+            str: A new premise generated from the current premise.
         """
-        premise_text = " ".join(f"{premise}" for premise in current_premises)
+        premise_text = f"- {premise}"
         new_premise = self.chatter.generate_response(premise_text)
         return new_premise.strip()
 
@@ -188,11 +188,12 @@ class SocraticReasoning:
             self.log('No premises available for logic as conclusion.', level='error')  # Log the absence of premises
             return "No premises available for logic as conclusion."
 
+        current_premise = self.premises[0]  # Start with the first premise
         additional_premises_count = 0  # Counter for additional premises
 
         # Generate new premises until a valid conclusion is drawn or the maximum limit is reached
         while additional_premises_count < 5:
-            new_premise = self.generate_new_premise(self.premises)
+            new_premise = self.generate_new_premise(current_premise)
             if not self.parse_statement(new_premise):
                 self.log_not_premise(f'Invalid generated premise: {new_premise}', level='error')
                 continue
@@ -200,11 +201,8 @@ class SocraticReasoning:
             self.save_premises()
             additional_premises_count += 1
 
-            # Create a single string from the premises
-            premise_text = " ".join(f"{premise}" for premise in self.premises)
-
-            # Use the premise_text as the input (knowledge) for generating a response
-            raw_response = self.chatter.generate_response(premise_text)
+            # Use the current premise as the input (knowledge) for generating a response
+            raw_response = self.chatter.generate_response(current_premise)
 
             # Process the response to get the conclusion
             conclusion = raw_response.strip()
@@ -363,3 +361,4 @@ if __name__ == "__main__":
     conclusion = socratic_reasoning.draw_conclusion()  # Draw a conclusion based on the premises
     print(conclusion)
     socratic_reasoning.interact()  # Start the interactive loop
+
