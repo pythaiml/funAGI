@@ -18,3 +18,13 @@ ujson
 
 # For system and process utilities.
 psutil
+
+#########
+expansion
+## integrate llama-agents
+#llama-agents
+## integrate llama-index replicate and huggingface
+#pip install llama-index-core
+#pip install llama-index-llms-openai
+#pip install llama-index-llms-replicate
+#pip install llama-index-embeddings-huggingface
