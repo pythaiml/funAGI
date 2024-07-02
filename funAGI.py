@@ -198,7 +198,7 @@ def main():
             placeholder = 'Enter your prompt here'
             text = ui.input(placeholder=placeholder).props('rounded outlined input-class=mx-3') \
                 .classes('w-full self-center').on('keydown.enter', send)
-        ui.markdown('[funAGI](https://github.com/autoGLM/funAGI)').classes('text-xs self-end mr-8 m-[-1em] text-primary')
+        ui.markdown('[funAGI](https://github.com/pythaiml/funAGI)').classes('text-xs self-end mr-8 m-[-1em] text-primary')
 
 logging.debug("starting funAGI")
 ui.run(title='funAGI')
