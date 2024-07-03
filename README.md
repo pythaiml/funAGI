@@ -6,8 +6,8 @@ The funAGI workflow integrates <a href="https://github.com/pythaiml/funAGI/blob/
 funAGI is designed to create a robust and scalable fundamental augmented generative intelligence system integrated with memory management, user interaction interfaces, reasoning capabilities, and API management into a modular architecture. funAGI key components include the core AGI logic from SocraticRreasoning to learn from data and make decisions, validating and drawing logic conclusions from given premise to generate conclusion. Memory management efficiently stores and retrieves conversation memories and logic creates valid truth. funAGI is designed to build upon past interactions and improve over time. API management handles API keys using dotenv allowing seamless interaction with external models such as OpenAI, groq and claude to generate responses. User interfaces offer both Command Line Interface (<a href="https://github.com/pythaiml/funAGI/blob/main/funAGIcli.py">funAGIcli</a>) and Graphical User Interface (<a href="https://github.com/pythaiml/funAGI/blob/main/funAGI.py">funAGI</a>) ensuring versatile and user-friendly interaction experiences. funAGI modular design allows for easy scalability and integration of new functionalities, making it a versatile and reliable tool for developing more advanced AGI systems. funAGI is developing to meet the evolving demands of AGI research and application, fostering innovation and efficiency for further development of open source augmented intelligence as a solution.
 
 # UIUX has been split into two versions<br />
-<b>funAGIcli.py</b> will maintain the terminal based interaction<br />
-<b><a href="https://github.com/pythaiml/funAGI/blob/main/funAGI.py">funAGI.py<a?</b> is the UIUX graphical expression<br />
+<b><a href="https://github.com/pythaiml/funAGI/blob/main/funAGIcli.py">funAGIcli.py</a></b> will maintain the terminal based interaction<br />
+<b><a href="https://github.com/pythaiml/funAGI/blob/main/funAGI.py">funAGI.py</a></b> is the UIUX graphical expression<br />
 
 
 # FundamentalAGI Project Setup
