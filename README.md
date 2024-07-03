@@ -156,21 +156,21 @@ This workflow provides a comprehensive view of how user input is processed, reas
                                       |
                                       v
                              +-------------------+
-                             |  Process THOT     |
+                             |  Process THOUGHT     |
                              |  (Various Reasoning|
                              |   Techniques)      |
                              +-------------------+
                                       |
                                       v
                              +-------------------+
-                             |  Log THOT Data    |
+                             |  Log THOUGHT Data |
                              +-------------------+
                                       |
                                       v
                              +-------------------+
-                             |  Draw Conclusion  |
-                             |  (GPT-4 Model)    |
-                             +-------------------+
+                             |  Draw Conclusion  |     +-------------------+
+                             |  (GPT-4 Model)    |  ---> [make decision]   |
+                             +-------------------+     +-------------------+
                                       |
                                       v
                              +-------------------+
