@@ -156,7 +156,7 @@ This workflow provides a comprehensive view of how user input is processed, reas
                                       |
                                       v
                              +-------------------+
-                             |  Process THOUGHT     |
+                             |  Process THOUGHT   |
                              |  (Various Reasoning|
                              |   Techniques)      |
                              +-------------------+
