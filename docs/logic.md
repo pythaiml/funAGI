@@ -216,7 +216,7 @@ if __name__ == '__main__':
         print(truth)
 ```
 
-This example demonstrates how to use the LogicTables class to add variables and expressions, generate and display a truth table, and validate logical expressions. 
+This example demonstrates how to use the LogicTables class to add variables and expressions, generate and display a truth table, and validate logical expressions. For a deeper understanding of the funAGI workflow visit <a href="https://rage.pythai.net/logictables-module-documentation/">logictables</a>
 
 
 
