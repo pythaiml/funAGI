@@ -251,7 +251,7 @@ def main():
         await openmind.internal_queue.put(question)  # Add the prompt to the internal queue for processing
 
     # Link the external stylesheet
-    ui.add_head_html('<link rel="stylesheet" href="/static/style.css">')
+    ui.add_head_html('<link rel="stylesheet" href="/static/easystyle.css">')
 
     # Initialize dark mode toggle
     dark_mode = ui.dark_mode()
