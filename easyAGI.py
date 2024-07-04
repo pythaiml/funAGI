@@ -1,3 +1,4 @@
+# easyAGI (c) Gregory L. Magnusson MIT license 2024
 import logging
 import asyncio
 import concurrent.futures
@@ -296,8 +297,8 @@ def main():
                 openmind.service_input = ui.input('Service (e.g., "openai", "groq")').classes('flex-1')
                 openmind.key_input = ui.input('API Key').classes('flex-1')
             with ui.dropdown_button('Actions', auto_close=True):
-                ui.menu_item('Add API Key', on_click=openmind.add_api_key)
-                ui.menu_item('List API Keys', on_click=openmind.list_api_keys)
+                ui.menu_item('Add API Key', on_click=openmind.add_api_key).props('style="color: #218838; font-weight: bold; background-color: #e2e6ea; font-size: 16px; padding: 10px; border: 3px groove #218838; border-radius: 5px; transition: background-color 100ms ease-in-out, box-shadow 100ms ease-in-out;"').classes('ml-2 py-2 px-4 shadow-md hover:shadow-lg active:shadow-sm')
+                ui.menu_item('List API Keys', on_click=openmind.list_api_keys).props('style="color: green; font-weight: bold; background-color: #e2e6ea; font-size: 16px; padding: 10px; border: 3px groove #218838; border-radius: 5px; transition: background-color 100ms ease-in-out, box-shadow 100ms ease-in-out;"').classes('ml-2 py-2 px-4 shadow-md hover:shadow-lg active:shadow-sm')
 
             # Container to list keys with delete buttons
             global keys_container
@@ -307,7 +308,7 @@ def main():
         with ui.row().classes('w-full no-wrap items-center'):
             placeholder = 'Enter your prompt here'
             text = ui.input(placeholder='Enter text here').props('rounded outlined input-class=mx-3 bg-green-100 input-style="color: green" input-class="font-mono"').props('style="border: 2px solid #4CAF50; width: 100%; outline: none;"').on('keydown.enter', send)
-        ui.markdown('[easyAGI](https://rage.pythai.net)').classes('text-xs self-end mr-8 m-[-1em] text-primary')
+        ui.markdown('[easyAGI](https://rage.pythai.net)').classes('text-xs self-end mr-8 m-[-1em] text-primary').props('style="color: green; font-weight: bold;').classes('text-lg font-bold')
 
     # Start the main loop
     asyncio.create_task(openmind.main_loop())
