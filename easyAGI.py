@@ -1,3 +1,4 @@
+# easyAGI recursive internal reasoning of thought version 1 for display purposes
 import logging
 import asyncio
 import concurrent.futures
@@ -251,10 +252,10 @@ def main():
         log_files = {
             "Premises Log": "./memory/logs/premises.json",
             "Not Premise Log": "./memory/logs/notpremise.json",
-            "Conclusions Log": "./memory/logs/conclusions.txt",
             "Truth Tables Log": "./memory/logs/truth_tables.json",
-            "Decisions Log": "./memory/logs/decisions.json",
-            "Thoughts Log": "./memory/logs/thoughts.json"
+            "Thoughts Log": "./memory/logs/thoughts.json",
+            "Conclusions Log": "./memory/logs/conclusions.txt",
+            "Decisions Log": "./memory/logs/decisions.json"
         }
 
         for log_name, log_path in log_files.items():
@@ -289,11 +290,10 @@ def main():
             global keys_container
             keys_container = ui.column().classes('w-full')
 
-    with ui.footer().classes('bg-white'), ui.column().classes('w-full max-w-3xl mx-auto my-6 input-area'):
+    with ui.footer().classes('bg-black'), ui.column().classes('w-full max-w-3xl mx-auto my-6 input-area'):
         with ui.row().classes('w-full no-wrap items-center'):
             placeholder = 'Enter your prompt here'
-            text = ui.input(placeholder=placeholder).props('rounded outlined input-class=mx-3') \
-                .classes('w-full self-center').on('keydown.enter', send)
+            text = ui.input(placeholder='Enter text here').props('rounded outlined input-class=mx-3 bg-green-100 input-style="color: green" input-class="font-mono"').props('style="border: 2px solid #4CAF50; width: 100%; outline: none;"').on('keydown.enter', send)
         ui.markdown('[funAGI](https://github.com/pythaiml/funAGI)').classes('text-xs self-end mr-8 m-[-1em] text-primary')
 
     # Start the main loop
@@ -306,5 +306,4 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        logging.info("Shutting down...")
-
+        logging.info("I'll be back...")
