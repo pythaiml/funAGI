@@ -1,0 +1,108 @@
+/* General Body Styles */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-image: url('/gfx/funAGIbkgrd.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #1f2937;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Link Styles */
+a:link, a:visited {
+    color: inherit !important;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Header Styles */
+header {
+    background-color: transparent; /* Transparent background */
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .main-content, .nicegui-content {
+        padding: 2rem;
+        margin: 2rem auto;
+        width: 90%;
+    }
+
+    header {
+        font-size: 1.45rem;
+    }
+
+    .button {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .response-container {
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 90%;
+    }
+
+    .response-text {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .main-content, .nicegui-content {
+        padding: 2rem;
+        margin: 2rem auto;
+        width: 85%;
+    }
+
+    header {
+        font-size: 1.5rem;
+    }
+
+    .button {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .response-container {
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 85%;
+    }
+
+    .response-text {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-content, .nicegui-content {
+        padding: 2rem;
+        margin: 2rem auto;
+        width: 80%;
+    }
+
+    header {
+        font-size: 1.5rem;
+    }
+
+    .button {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .response-container {
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 80%;
+    }
+
+    .response-text {
+        font-size: 1rem;
+    }
+}
