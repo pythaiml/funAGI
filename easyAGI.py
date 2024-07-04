@@ -1,4 +1,3 @@
-# easyAGI (c) Gregory L. Magnusson 2024 MIT license
 import logging
 import asyncio
 import concurrent.futures
