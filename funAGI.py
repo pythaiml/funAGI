@@ -1,3 +1,4 @@
+# funAGI.py
 from nicegui import ui, app
 import openai
 import logging
@@ -193,11 +194,10 @@ def main():
             global keys_container
             keys_container = ui.column().classes('w-full')
 
-    with ui.footer().classes('bg-white'), ui.column().classes('w-full max-w-3xl mx-auto my-6 input-area'):
+    with ui.footer().classes('bg-black'), ui.column().classes('w-full max-w-3xl mx-auto my-6 input-area'):
         with ui.row().classes('w-full no-wrap items-center'):
             placeholder = 'Enter your prompt here'
-            text = ui.input(placeholder=placeholder).props('rounded outlined input-class=mx-3') \
-                .classes('w-full self-center').on('keydown.enter', send)
+            text = ui.input(placeholder='Enter text here').props('rounded outlined input-class=mx-3 bg-green-100 input-style="color: green" input-class="font-mono"').props('style="border: 2px solid #4CAF50; width: 100%; outline: none;"').on('keydown.enter', send)
         ui.markdown('[funAGI](https://github.com/pythaiml/funAGI)').classes('text-xs self-end mr-8 m-[-1em] text-primary')
 
 logging.debug("starting funAGI")
